@@ -1,4 +1,4 @@
-package com.formedix.exercise.entities;
+package com.formedix.exercise.models;
 
 public class Currency {
 
