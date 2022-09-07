@@ -2,6 +2,7 @@ package com.formedix.exercise.models;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.formedix.exercise.exceptions.RateNotFoundException;
 
@@ -21,11 +22,8 @@ public class DayRate {
 		return rates;
 	}
 	
-	public Double getCurrencyRate (String currency) {
-		if (!this.rates.containsKey(currency)) {
-			throw new RateNotFoundException(currency);
-		}
-		
-		return this.rates.get(currency);
+	public Double getCurrencyRate(String currency) {		
+		return Optional.ofNullable(this.rates.get(currency))
+				.orElseThrow(() -> new RateNotFoundException(currency));
 	}
 }

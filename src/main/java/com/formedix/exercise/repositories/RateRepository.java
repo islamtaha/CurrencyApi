@@ -1,10 +1,15 @@
 package com.formedix.exercise.repositories;
 
-import org.springframework.stereotype.Repository;
+import java.util.Date;
+import java.util.Map;
 
-@Repository
-public class RateRepository {
-	
-	
+import com.formedix.exercise.models.DayRate;
 
+public interface RateRepository {
+	
+	public double getRateInDate(Date date, String currency);
+	
+	public Map<String, Double> getAllCurrencyRatesInDate(Date date);
+	
+	public Map<Date, DayRate> getAllRates();
 }

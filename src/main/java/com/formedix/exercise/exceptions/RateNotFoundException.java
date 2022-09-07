@@ -8,13 +8,13 @@ public class RateNotFoundException extends ResponseStatusException {
 	private final String currency;
 	
 	public RateNotFoundException(String currency) {
-		super(HttpStatus.BAD_REQUEST, "Requested Currency " + currency + " is Not Found!");
+		super(HttpStatus.BAD_REQUEST, "Requested Currency " + currency + " not found");
 		this.currency = currency;
 	}
 	
 	@Override
 	public String toString() {
-		return "No Rate found for " + currency;
+		return "No Rate found for Currency: " + currency;
 	}
 
 }
