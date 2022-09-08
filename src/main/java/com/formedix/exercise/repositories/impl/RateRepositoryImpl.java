@@ -34,6 +34,7 @@ public class RateRepositoryImpl implements RateRepository {
 		
 	@PostConstruct
 	public void init() throws IOException, ParseException {
+		allRate = new AllRate();
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
 		InputStream inputStream = resourceLoader.getResource("classpath:rates.csv").getInputStream();
@@ -48,7 +49,7 @@ public class RateRepositoryImpl implements RateRepository {
 		List<String> currency = records.get(0);
 		for(int i = 1; i < records.size(); i++) {
 			Date date = df.parse(records.get(i).get(0));
-			for(int j = 1; j < records.get(i).size(); j++) {
+			for(int j = 1; j < records.get(i).size()-1; j++) {
 				if(!records.get(i).get(j).equals("N/A")) {
 					allRate.setRateInDate(date, currency.get(j), Double.parseDouble(records.get(i).get(j)));
 				}

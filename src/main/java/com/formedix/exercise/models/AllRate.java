@@ -16,11 +16,7 @@ public class AllRate {
 	}
 	
 	public void setRateInDate(Date date, String currency, Double rate) {
-		this.allRates.computeIfAbsent(date, key -> {
-			DayRate dayRate = new DayRate();
-			dayRate.setCurrencyRate(currency, rate);
-			return dayRate;
-		});
+		this.allRates.computeIfAbsent(date, key -> new DayRate()).setCurrencyRate(currency, rate);
 	}
 	
 	public double getRateInDate(Date date, String currency) {
