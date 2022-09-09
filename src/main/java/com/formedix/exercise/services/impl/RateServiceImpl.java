@@ -40,7 +40,7 @@ public class RateServiceImpl implements RateService {
 		logger.info("Source currency: {}, source rate: {}", sourceCurrency, sourceRate);
 		
 		Double targetRate = rateRepository.getRateInDate(date, targetCurrency);
-		logger.info("Target currency: {}, target rate: {}", sourceCurrency, sourceRate);
+		logger.info("Target currency: {}, target rate: {}", targetCurrency, targetRate);
 		
 		return amount / sourceRate * targetRate;
 	}
