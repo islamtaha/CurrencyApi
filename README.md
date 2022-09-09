@@ -12,8 +12,10 @@ CurrencyApi is a REST-API App that makes operations on different currencies base
 - Swagger endpoint: `http://localhost:8080/swagger-ui.html`
 
 # How to run
-- install maven then run the following command in the projects directory: 
-`$ mvn spring-boot:run`
+- install maven then run the following command in the projects directory:
+```
+$ mvn spring-boot:run
+```
 - or run the following two commands: 
 ```
 $ mvn clean package spring-boot:repackage
