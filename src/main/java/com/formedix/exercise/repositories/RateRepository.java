@@ -7,7 +7,7 @@ import com.formedix.exercise.models.DayRate;
 
 public interface RateRepository {
 	
-	public double getRateInDate(Date date, String currency);
+	public Double getRateInDate(Date date, String currency);
 	
 	public Map<String, Double> getAllCurrencyRatesInDate(Date date);
 	

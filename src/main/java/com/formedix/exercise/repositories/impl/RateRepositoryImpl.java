@@ -15,6 +15,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
@@ -27,11 +29,20 @@ import com.opencsv.CSVReader;
 @Repository
 public class RateRepositoryImpl implements RateRepository {
 	
+    private Logger logger = LoggerFactory.getLogger(RateRepositoryImpl.class);
+	
 	private AllRate allRate;
 	
 	@Autowired
 	private ResourceLoader resourceLoader;
-		
+	
+	public RateRepositoryImpl() {}
+	
+	// for testing
+	RateRepositoryImpl(ResourceLoader resourceLoader) {
+		this.resourceLoader = resourceLoader;
+	}
+	
 	@PostConstruct
 	public void init() throws IOException, ParseException {
 		allRate = new AllRate();
@@ -49,15 +60,17 @@ public class RateRepositoryImpl implements RateRepository {
 		List<String> currency = records.get(0);
 		for(int i = 1; i < records.size(); i++) {
 			Date date = df.parse(records.get(i).get(0));
-			for(int j = 1; j < records.get(i).size()-1; j++) {
-				if(!records.get(i).get(j).equals("N/A")) {
+			for(int j = 1; j < records.get(i).size(); j++) {
+				if(!records.get(i).get(j).equals("N/A") && !records.get(i).get(j).isEmpty()) {
+					String formatedDate = df.format(date);
+					logger.debug("Date: {}, currency: {}, rate: {}", formatedDate, currency.get(j), records.get(i).get(j));
 					allRate.setRateInDate(date, currency.get(j), Double.parseDouble(records.get(i).get(j)));
 				}
 			}
 		}
 	}
 	
-	public double getRateInDate(Date date, String currency) {
+	public Double getRateInDate(Date date, String currency) {
 		return allRate.getRateInDate(date, currency);
 	}
 
